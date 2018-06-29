@@ -40,7 +40,6 @@ namespace Calculator
         {
             get { return OperatorSelectionBox.SelectedItem.ToString(); }
         }
-        public CalculatorPresenter Presenter { private get; set; }
 
         public void ShowMessageBox(string msg)
         {

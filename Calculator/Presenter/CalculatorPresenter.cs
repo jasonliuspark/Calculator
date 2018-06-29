@@ -8,12 +8,11 @@ using Calculator.Model;
 
 namespace Calculator.Presenter
 {
-   // public delegate void ResultEventHandler(string result);
+   public delegate void ResultEventHandler(string result);
     public class CalculatorPresenter
     {
-        private string _result;
-        //public delegate void ResultEventHandler(string result);
-       // public ResultEventHandler NotifyResultEvent;
+        private string _result;      
+        public ResultEventHandler NotifyResultEvent;
 
         public CalculatorPresenter(ICalculatorViewable view)
         {
@@ -38,7 +37,7 @@ namespace Calculator.Presenter
             {
                 operands = TryParseNum(firstOperand, secondOperand);
                 _result = new CalculatorManager().Calculate(operatorSymbol, operands[0], operands[1]).ToString();
-                //NotifyResultEvent(_result);
+                NotifyResultEvent(_result);
             }
             else
             {
@@ -48,7 +47,7 @@ namespace Calculator.Presenter
 
         private void Observer()
         {
-            //NotifyResultEvent += UpdateResultMain;
+            NotifyResultEvent += UpdateResultMain;
             // NotifyResultEvent += UpdateResultSecond;
         }
 
@@ -58,7 +57,7 @@ namespace Calculator.Presenter
         }
         private void Unobserver()
         {
-            //NotifyResultEvent -= UpdateResultMain;
+            NotifyResultEvent -= UpdateResultMain;
             // NotifyResultEvent -= UpdateResultSecond;
 
         }
@@ -102,7 +101,7 @@ namespace Calculator.Presenter
 
         private readonly ICalculatorViewable _view;
         //private readonly IResultFormViewable _resultFormView;
-        private readonly ICalculatorManagerable _calculatorManagerable;
+        private readonly IResultManager _calculatorManagerable;
 
     }
 
