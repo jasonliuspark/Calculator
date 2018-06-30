@@ -1,18 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculator.Model
 {
 
-    public delegate void ResultEventHandler(string result);
-     public static class CalculatorManager
-     {
-         public static ResultEventHandler NotifyResultEvent;
+    public class CalculatorManager
+    {
+        public EventHandler<ResultEventEventArgs> NotifyResultEvent;
 
-        public static double CalculateAction(string operand, double firstNum, double secondNum)
+        #region Public Methods
+        private static CalculatorManager _uniqueCalculatorManager;
+        private CalculatorManager()
+        {
+
+        }
+
+        public static CalculatorManager Instance => _uniqueCalculatorManager ?? (_uniqueCalculatorManager = new CalculatorManager());
+
+        public double Calculate(string operand, double firstNum, double secondNum)
         {
             double result = 0;
             switch (operand)
@@ -32,10 +36,21 @@ namespace Calculator.Model
                 default:
                     break;
             }
+            NotifyResultEvent(this, new ResultEventEventArgs(result.ToString()));
             return result;
         }
-
-
-        
+        #endregion
     }
+    public class ResultEventEventArgs : EventArgs
+    {
+        public string Result { get; set; }
+
+        public ResultEventEventArgs(string result)
+        {
+            Result = result;
+        }
+    }
+
 }
+
+

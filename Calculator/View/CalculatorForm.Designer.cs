@@ -1,4 +1,6 @@
-﻿namespace Calculator
+﻿using System;
+
+namespace Calculator
 {
     partial class CalculatorFrom
     {
@@ -82,9 +84,9 @@
             this.Controls.Add(this.EQLable);
             this.Controls.Add(this.SecNum);
             this.Controls.Add(this.FirstNum);
+            this.HandleCreated+=new EventHandler(this.CalculatorFrom_Created);
+            this.HandleDestroyed+=new EventHandler(this.CalculatorFrom_FormDestroyed);
             this.Name = "CalculatorFrom";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CalculatorFrom_FormClosed);
-            this.Load += new System.EventHandler(this.CalculatorFrom_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

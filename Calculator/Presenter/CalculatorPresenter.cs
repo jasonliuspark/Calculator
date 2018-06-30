@@ -7,18 +7,15 @@ namespace Calculator.Presenter
 {
     public class CalculatorPresenter
     {
-        private string _result;
-
         public CalculatorPresenter(ICalculatorViewable view)
         {
             _view = view;
             _view.OperatorList = new List<string>() { "+", "-", "*", "/" };
         }
 
-
-        public void CalculationFormLoad()
+        public void OnHandleCalculatorFormCreated()
         {
-            Observer();
+            Observe();
         }
 
         public void OnCalculateButtonClick()
@@ -31,33 +28,33 @@ namespace Calculator.Presenter
             if (InputRestrainTest(firstOperand) && InputRestrainTest(secondOperand))
             {
                 operands = TryParseNum(firstOperand, secondOperand);
-                _result = CalculatorManager.CalculateAction(operatorSymbol, operands[0], operands[1]).ToString();
-                CalculatorManager.NotifyResultEvent(_result);
+                CalculatorManager.Instance.Calculate(operatorSymbol, operands[0], operands[1]);
             }
             else
             {
-                _view.ShowMessageBox("please input valid numbers for both text boxes");
+                _view.ShowMessageBox(Properties.Resources.strInvalidInputNumberMsg);
             }
         }
 
         #region Private Methods  
-        private void Observer()
+        private void Observe()
         {
-            CalculatorManager.NotifyResultEvent += UpdateResultMain;
+            CalculatorManager.Instance.NotifyResultEvent += UpdateResultMain;
         }
 
-        public void CalculationFormClosed()
+        public void OnHandleCalculationFormDestroyed()
         {
-            Unobserver();
-        }
-        private void Unobserver()
-        {
-            CalculatorManager.NotifyResultEvent -= UpdateResultMain;
+            Unobserve();
         }
 
-        private void UpdateResultMain(string result)
+        private void Unobserve()
         {
-            _view.CalculationResult = result;
+            CalculatorManager.Instance.NotifyResultEvent -= UpdateResultMain;
+        }
+
+        private void UpdateResultMain(object sender, ResultEventEventArgs e)
+        {
+            _view.CalculationResult = e.Result;
         }
 
         private double[] TryParseNum(string firstNum, string secondNum)
@@ -70,7 +67,6 @@ namespace Calculator.Presenter
 
         private bool InputRestrainTest(string inputValidation)
         {
-
             if (inputValidation != "")
             {
                 string pattern = @"^(-?\d+)(\.\d+)?$";
@@ -88,9 +84,11 @@ namespace Calculator.Presenter
             { return false; }
         }
         #endregion
+
+        #region Private Fields
         private readonly ICalculatorViewable _view;
+        #endregion
 
     }
-
 
 }

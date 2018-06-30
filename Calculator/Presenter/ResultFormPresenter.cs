@@ -1,47 +1,45 @@
 ﻿using Calculator.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
 
 namespace Calculator.Presenter
 {
     class ResultFormPresenter
     {
-        private string _results;
-        private Delegate ResultHandler;
+        #region Public Method           
         public ResultFormPresenter(IResultFormViewable view)
         {
             _view = view;
         }
 
-        public void ResultFormLoad()
+        public void OnHandleResultFormCreated()
         {
-            Oberver();
-        }
-        #region Private methods
-        private void Oberver()
-        {
-            CalculatorManager.NotifyResultEvent += UpdateResult;
+            Observe();
         }
 
-        private void Unobserver()
+        public void OnHandleResultFormDestroyed()
         {
-            CalculatorManager.NotifyResultEvent -= UpdateResult;
-        }
-        private void UpdateResult(string result)
-        {
-            _view.Result = result;
-
+            Unobserve();
         }
         #endregion
-        #region private 
+        #region Private methods
+        private void Observe()
+        {
+            CalculatorManager.Instance.NotifyResultEvent += UpdateResult;
+        }
+
+        private void Unobserve()
+        {
+            CalculatorManager.Instance.NotifyResultEvent -= UpdateResult;
+        }
+        private void UpdateResult(object sender, ResultEventEventArgs e)
+        {
+            _view.Result = e.Result;
+        }
+        #endregion
+        #region Private Fields
         private readonly IResultFormViewable _view;
         #endregion
+
+
     }
-
-
 }

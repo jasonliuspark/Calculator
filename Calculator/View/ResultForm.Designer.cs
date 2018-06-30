@@ -1,4 +1,6 @@
-﻿namespace Calculator.View
+﻿using System;
+
+namespace Calculator.View
 {
     partial class ResultForm
     {
@@ -47,9 +49,10 @@
             this.Controls.Add(this.ResultBox2);
             this.Name = "ResultForm";
             this.Text = "ResultForm";
-            this.Load += new System.EventHandler(this.ResultForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.HandleCreated+= new EventHandler(this.ResultForm_Load);
+            this.HandleDestroyed+= new EventHandler(this.OnHandleResultFormDestroyed);
 
         }
 
