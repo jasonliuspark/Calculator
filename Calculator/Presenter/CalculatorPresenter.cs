@@ -1,25 +1,20 @@
-﻿using System;
-using Calculator.Model;
+﻿using Calculator.Model;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Calculator.View;
-using Calculator.Model;
 
 
 namespace Calculator.Presenter
 {
-   public delegate void ResultEventHandler(string result);
     public class CalculatorPresenter
     {
-        private string _result;      
-        public ResultEventHandler NotifyResultEvent;
+        private string _result;
 
         public CalculatorPresenter(ICalculatorViewable view)
         {
             _view = view;
             _view.OperatorList = new List<string>() { "+", "-", "*", "/" };
-            //_calculatorManagerable = ();
         }
+
 
         public void CalculationFormLoad()
         {
@@ -36,8 +31,8 @@ namespace Calculator.Presenter
             if (InputRestrainTest(firstOperand) && InputRestrainTest(secondOperand))
             {
                 operands = TryParseNum(firstOperand, secondOperand);
-                _result = new CalculatorManager().Calculate(operatorSymbol, operands[0], operands[1]).ToString();
-                NotifyResultEvent(_result);
+                _result = CalculatorManager.CalculateAction(operatorSymbol, operands[0], operands[1]).ToString();
+                CalculatorManager.NotifyResultEvent(_result);
             }
             else
             {
@@ -45,10 +40,10 @@ namespace Calculator.Presenter
             }
         }
 
+        #region Private Methods  
         private void Observer()
         {
-            NotifyResultEvent += UpdateResultMain;
-            // NotifyResultEvent += UpdateResultSecond;
+            CalculatorManager.NotifyResultEvent += UpdateResultMain;
         }
 
         public void CalculationFormClosed()
@@ -57,18 +52,12 @@ namespace Calculator.Presenter
         }
         private void Unobserver()
         {
-            NotifyResultEvent -= UpdateResultMain;
-            // NotifyResultEvent -= UpdateResultSecond;
-
+            CalculatorManager.NotifyResultEvent -= UpdateResultMain;
         }
 
         private void UpdateResultMain(string result)
         {
             _view.CalculationResult = result;
-        }
-        private void UpdateResultSecond(string result)
-        {
-            //_resultFormView.Result = result;
         }
 
         private double[] TryParseNum(string firstNum, string secondNum)
@@ -98,10 +87,8 @@ namespace Calculator.Presenter
             else
             { return false; }
         }
-
+        #endregion
         private readonly ICalculatorViewable _view;
-        //private readonly IResultFormViewable _resultFormView;
-        private readonly IResultManager _calculatorManagerable;
 
     }
 

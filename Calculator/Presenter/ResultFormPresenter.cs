@@ -5,41 +5,42 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Calculator.Presenter
 {
     class ResultFormPresenter
     {
         private string _results;
-        
+        private Delegate ResultHandler;
         public ResultFormPresenter(IResultFormViewable view)
         {
             _view = view;
-            
-            //_calculatorManager = 
         }
 
         public void ResultFormLoad()
         {
             Oberver();
         }
+        #region Private methods
         private void Oberver()
         {
-         //NotifyResultEvent  +=  UpdateResult;
+            CalculatorManager.NotifyResultEvent += UpdateResult;
         }
 
         private void Unobserver()
         {
-
+            CalculatorManager.NotifyResultEvent -= UpdateResult;
         }
-        private void UpdateResult()
+        private void UpdateResult(string result)
         {
-          //  _view.Result=_calculatorManager.Result;
+            _view.Result = result;
 
         }
-
+        #endregion
+        #region private 
         private readonly IResultFormViewable _view;
-        private readonly IResultManager _calculatorManager;
+        #endregion
     }
 
 

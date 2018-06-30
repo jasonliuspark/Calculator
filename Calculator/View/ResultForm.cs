@@ -26,7 +26,6 @@ namespace Calculator.View
 
         private readonly ResultFormPresenter _presenter;
         
-
         private void ResultForm_Load(object sender, EventArgs e)
         {
             _presenter.ResultFormLoad();

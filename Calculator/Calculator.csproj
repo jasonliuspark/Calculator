@@ -46,8 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\CalculatorManager.cs" />
-    <Compile Include="Model\IResultManager.cs" />
-    <Compile Include="Model\ResultManager.cs" />
     <Compile Include="Presenter\CalculatorPresenter.cs" />
     <Compile Include="Presenter\IResultFormViewable.cs" />
     <Compile Include="Presenter\ResultFormPresenter.cs" />

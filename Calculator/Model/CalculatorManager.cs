@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Calculator.Model
 {
-    
 
-    public class CalculatorManager
-    {
-        
-        public double Calculate(string operand, double firstNum, double secondNum)
+    public delegate void ResultEventHandler(string result);
+     public static class CalculatorManager
+     {
+         public static ResultEventHandler NotifyResultEvent;
+
+        public static double CalculateAction(string operand, double firstNum, double secondNum)
         {
             double result = 0;
             switch (operand)
@@ -33,5 +34,8 @@ namespace Calculator.Model
             }
             return result;
         }
+
+
+        
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Calculator.View;
 
 namespace Calculator
 {
@@ -48,8 +49,7 @@ namespace Calculator
 
         #endregion
 
-        private readonly CalculatorPresenter _presenter;
-
+        #region private methods   
         private void calculateButton_Click(object sender, EventArgs e)
         {
             _presenter.OnCalculateButtonClick();
@@ -64,7 +64,7 @@ namespace Calculator
         {
             _presenter.CalculationFormClosed();
         }
-
-     
+        #endregion  
+        private readonly CalculatorPresenter _presenter;
     }
 }
