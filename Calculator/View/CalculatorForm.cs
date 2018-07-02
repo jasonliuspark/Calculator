@@ -16,7 +16,7 @@ namespace Calculator
         #region ICalculatorViewable Members
 
         public IList<string> OperatorList
-        {        
+        {
             set { OperatorSelectionBox.DataSource = value; }
         }
 
