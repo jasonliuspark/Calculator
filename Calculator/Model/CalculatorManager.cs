@@ -57,7 +57,7 @@ namespace Calculator.Model
         {
             using (var db = new CalculationContext())
             {
-                DataTable dt = new DataTable("Calculations");
+                DataTable dt = new DataTable("Calculations");               
                 var query = from b in db.Calculations orderby b.CalculationId select b;
                 List<CalculationResultModel> list = query.ToList();
                 var props = typeof(CalculationResultModel).GetProperties();
@@ -77,7 +77,6 @@ namespace Calculator.Model
                         dt.LoadDataRow(array, true);
                     }
                 }
-
                 return dt;
             }
 

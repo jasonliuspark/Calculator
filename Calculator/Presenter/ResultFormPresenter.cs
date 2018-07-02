@@ -9,7 +9,7 @@ namespace Calculator.Presenter
         public ResultFormPresenter(IResultFormViewable view)
         {
             _view = view;
-            _view.Dt = CalculatorManager.Instance.GetResultData();
+            //_view.Dt = CalculatorManager.Instance.GetResultData();
         }
 
         #endregion
