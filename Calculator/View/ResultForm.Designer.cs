@@ -51,8 +51,8 @@ namespace Calculator.View
             this.Text = "ResultForm";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.HandleCreated+= new EventHandler(this.ResultForm_Load);
-            this.HandleDestroyed+= new EventHandler(this.OnHandleResultFormDestroyed);
+            this.HandleCreated+= new EventHandler(this.ResultForm_HandleCreated);
+            this.HandleDestroyed+= new EventHandler(this.ResultForm_HandleDestroyed);
 
         }
 

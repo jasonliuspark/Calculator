@@ -5,14 +5,16 @@ namespace Calculator.Model
 
     public class CalculatorManager
     {
-        public EventHandler<ResultEventEventArgs> NotifyResultEvent;
+        public EventHandler<ResultEventArgs> NotifyResultEvent;
 
-        #region Public Methods
+        #region Constructor
+
         private static CalculatorManager _uniqueCalculatorManager;
         private CalculatorManager()
         {
 
         }
+        #endregion
 
         public static CalculatorManager Instance => _uniqueCalculatorManager ?? (_uniqueCalculatorManager = new CalculatorManager());
 
@@ -36,19 +38,14 @@ namespace Calculator.Model
                 default:
                     break;
             }
-            NotifyResultEvent(this, new ResultEventEventArgs(result.ToString()));
+            NotifyResultEvent?.Invoke(this, new ResultEventArgs { Result = result.ToString() });
             return result;
         }
-        #endregion
     }
-    public class ResultEventEventArgs : EventArgs
+
+    public class ResultEventArgs : EventArgs
     {
         public string Result { get; set; }
-
-        public ResultEventEventArgs(string result)
-        {
-            Result = result;
-        }
     }
 
 }

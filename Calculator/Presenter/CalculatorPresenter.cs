@@ -7,15 +7,26 @@ namespace Calculator.Presenter
 {
     public class CalculatorPresenter
     {
+        #region Constructor
+
         public CalculatorPresenter(ICalculatorViewable view)
         {
             _view = view;
             _view.OperatorList = new List<string>() { "+", "-", "*", "/" };
         }
 
-        public void OnHandleCalculatorFormCreated()
+        #endregion
+
+        #region Public Methods
+
+        public void OnHandleCreated()
         {
             Observe();
+        }
+
+        public void OnHandleDestroyed()
+        {
+            Unobserve();
         }
 
         public void OnCalculateButtonClick()
@@ -36,15 +47,13 @@ namespace Calculator.Presenter
             }
         }
 
-        #region Private Methods  
+        #endregion
+
+        #region Private Methods
+
         private void Observe()
         {
             CalculatorManager.Instance.NotifyResultEvent += UpdateResultMain;
-        }
-
-        public void OnHandleCalculationFormDestroyed()
-        {
-            Unobserve();
         }
 
         private void Unobserve()
@@ -52,7 +61,7 @@ namespace Calculator.Presenter
             CalculatorManager.Instance.NotifyResultEvent -= UpdateResultMain;
         }
 
-        private void UpdateResultMain(object sender, ResultEventEventArgs e)
+        private void UpdateResultMain(object sender, ResultEventArgs e)
         {
             _view.CalculationResult = e.Result;
         }
@@ -83,12 +92,13 @@ namespace Calculator.Presenter
             else
             { return false; }
         }
+
         #endregion
 
         #region Private Fields
+
         private readonly ICalculatorViewable _view;
+
         #endregion
-
     }
-
 }

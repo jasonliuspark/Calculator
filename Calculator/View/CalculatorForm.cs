@@ -16,24 +16,23 @@ namespace Calculator
         #region ICalculatorViewable Members
 
         public IList<string> OperatorList
-        {
-            get { return (IList<string>)this.OperatorSelectionBox.DataSource; }
-            set { this.OperatorSelectionBox.DataSource = value; }
+        {        
+            set { OperatorSelectionBox.DataSource = value; }
         }
 
         public string FirstOperand
         {
-            get { return this.FirstNum.Text; }
+            get { return FirstNum.Text; }
         }
 
         public string SecondOperand
         {
-            get { return this.SecNum.Text; }
+            get { return SecNum.Text; }
         }
 
         public string CalculationResult
         {
-            set { this.ResultText.Text = value; }
+            set { ResultText.Text = value; }
         }
 
         public string CalculationOperator
@@ -48,22 +47,29 @@ namespace Calculator
 
         #endregion
 
-        #region private methods   
+        #region private methods 
+
         private void calculateButton_Click(object sender, EventArgs e)
         {
             _presenter.OnCalculateButtonClick();
         }
 
-        private void CalculatorFrom_Created(object sender, EventArgs e)
+        private void CalculatorFrom_HandleCreated(object sender, EventArgs e)
         {
-            _presenter.OnHandleCalculatorFormCreated();
+            _presenter.OnHandleCreated();
         }
 
-        private void CalculatorFrom_FormDestroyed(object sender, EventArgs e)
+        private void CalculatorFrom_HandleDestroyed(object sender, EventArgs e)
         {
-            _presenter.OnHandleCalculationFormDestroyed();
+            _presenter.OnHandleDestroyed();
         }
-        #endregion  
+
+        #endregion
+
+        #region Private Fields
+
         private readonly CalculatorPresenter _presenter;
+
+        #endregion
     }
 }

@@ -84,8 +84,8 @@ namespace Calculator
             this.Controls.Add(this.EQLable);
             this.Controls.Add(this.SecNum);
             this.Controls.Add(this.FirstNum);
-            this.HandleCreated+=new EventHandler(this.CalculatorFrom_Created);
-            this.HandleDestroyed+=new EventHandler(this.CalculatorFrom_FormDestroyed);
+            this.HandleCreated+=new EventHandler(this.CalculatorFrom_HandleCreated);
+            this.HandleDestroyed+=new EventHandler(this.CalculatorFrom_HandleDestroyed);
             this.Name = "CalculatorFrom";
             this.ResumeLayout(false);
             this.PerformLayout();
