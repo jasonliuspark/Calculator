@@ -1,5 +1,6 @@
 ﻿using Calculator.Presenter;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Calculator.View
@@ -16,17 +17,23 @@ namespace Calculator.View
 
         #endregion
 
-        #region Result Members
-         public string Result
+        #region IResultFormViewable Members
+        public string Result
         {
             set { ResultBox2.Text = value; }
+        }
+
+        public DataTable Dt
+        {
+            set
+            { ResultPresentationGrid.DataSource = value; }
         }
 
         #endregion
 
         #region Event Handlers
 
-         private void ResultForm_HandleCreated(object sender, EventArgs e)
+        private void ResultForm_HandleCreated(object sender, EventArgs e)
         {
             _presenter.OnHandleCreated();
         }

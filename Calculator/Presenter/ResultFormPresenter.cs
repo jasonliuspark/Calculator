@@ -9,6 +9,7 @@ namespace Calculator.Presenter
         public ResultFormPresenter(IResultFormViewable view)
         {
             _view = view;
+            _view.Dt = CalculatorManager.Instance.GetResultData();
         }
 
         #endregion
@@ -32,6 +33,7 @@ namespace Calculator.Presenter
         private void Observe()
         {
             CalculatorManager.Instance.NotifyResultEvent += UpdateResult;
+            CalculatorManager.Instance.UpdateDbEvent += UpdateDB;
         }
 
         private void Unobserve()
@@ -44,6 +46,10 @@ namespace Calculator.Presenter
             _view.Result = e.Result;
         }
 
+        private void UpdateDB(object sender, UpdateDbEventArgs e)
+        {
+            _view.Dt = e.CalculatinResult;
+        }
         #endregion
 
         #region Private Fields

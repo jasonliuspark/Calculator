@@ -47,7 +47,7 @@ namespace Calculator
 
         #endregion
 
-        #region private methods 
+        #region Event Handlers 
 
         private void calculateButton_Click(object sender, EventArgs e)
         {
