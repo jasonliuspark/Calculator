@@ -1,15 +1,18 @@
-﻿using Calculator.Model;
+﻿using Calculator.BusinessLogic.Managers;
+using Calculator.DataAccess.Results;
+using Calculator.Domain.Results;
 
-namespace Calculator.Presenter
+namespace Calculator.Presentation.Presenter
 {
     class ResultFormPresenter
     {
         #region Constructor
 
-        public ResultFormPresenter(IResultFormViewable view)
+        public ResultFormPresenter(IResultFormViewable view,ICalculationResults results)
         {
             _view = view;
-            _view.Dt = CalculatorManager.Instance.GetResultData();
+            _results = results;
+            _view.Dt =_results.GetResultData() ;
         }
 
         #endregion
@@ -55,6 +58,7 @@ namespace Calculator.Presenter
         #region Private Fields
 
         private readonly IResultFormViewable _view;
+        private readonly ICalculationResults _results;
 
         #endregion
     }

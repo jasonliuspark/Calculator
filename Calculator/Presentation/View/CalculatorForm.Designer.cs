@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Calculator
+namespace Calculator.Presentation.View
 {
     partial class CalculatorFrom
     {

@@ -1,9 +1,10 @@
-﻿using Calculator.Presenter;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using Calculator.DataAccess.Results;
+using Calculator.Presentation.Presenter;
 
-namespace Calculator.View
+namespace Calculator.Presentation.View
 {
     public partial class ResultForm : Form, IResultFormViewable
     {
@@ -12,7 +13,7 @@ namespace Calculator.View
         public ResultForm()
         {
             InitializeComponent();
-            _presenter = new ResultFormPresenter(this);
+            _presenter = new ResultFormPresenter(this, ResultRepository.Instance);
         }
 
         #endregion

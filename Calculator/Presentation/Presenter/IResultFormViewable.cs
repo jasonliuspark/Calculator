@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Calculator.Presenter
+namespace Calculator.Presentation.Presenter
 {
     public interface IResultFormViewable
     {

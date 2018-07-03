@@ -1,9 +1,8 @@
-﻿using Calculator.Model;
+﻿using Calculator.BusinessLogic.Managers;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-
-namespace Calculator.Presenter
+namespace Calculator.Presentation.Presenter
 {
     public class CalculatorPresenter
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Calculator.View
+﻿namespace Calculator.Presentation.View
 {
     partial class ResultForm
     {

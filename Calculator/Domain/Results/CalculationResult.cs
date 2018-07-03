@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Calculator.Model
+namespace Calculator.Domain.Results
 {
-    public class CalculationResultModel
+    public class CalculationResult
     {
         #region Model members
 
@@ -15,4 +15,5 @@ namespace Calculator.Model
 
         #endregion
     }
+
 }

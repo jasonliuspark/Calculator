@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Calculator.Presenter
+namespace Calculator.Presentation.Presenter
 {
     public interface ICalculatorViewable
     {

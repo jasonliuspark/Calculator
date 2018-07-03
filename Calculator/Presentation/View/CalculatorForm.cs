@@ -1,9 +1,9 @@
-﻿using Calculator.Presenter;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Calculator.Presentation.Presenter;
 
-namespace Calculator
+namespace Calculator.Presentation.View
 {
     public partial class CalculatorFrom : Form, ICalculatorViewable
     {
